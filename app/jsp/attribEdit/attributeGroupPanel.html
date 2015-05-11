@@ -1,0 +1,77 @@
+<form name="saveProductForm">
+	<div ui-if="groupTabs == aGroup.mId" ui-scope-context="aGroup" ng-repeat="aGroup in attributeGroups">
+		<ul class="list-group table">
+			<li class="list-group-item clearfix" ng-class="{active : attr.mKey == currentAttribute.mKey}" ui-scope-context="attr" ng-repeat="attr in aGroup.mAttributeList">
+				<div class="col-xs-2 text-fluid">
+					<div class="row">{{attr.mKey}}</div>
+				</div>
+				<div class="col-xs-4">
+					{{attr.mDisplayName}} &nbsp;
+					<span ng-if="attr.mRequired" class="glyphicon glyphicon-asterisk icon-tooltip text-danger" alt="Required"></span>
+					<span ng-if="attr.mIndexed" class="glyphicon glyphicon-pushpin icon-tooltip" alt="Index"></span>
+					<span ng-if="attr.mDuplicated" class="glyphicon glyphicon-duplicate icon-tooltip" alt="Duplicate"></span>
+					<span  ng-if="attr.mDimension" class="glyphicon glyphicon-move icon-tooltip" alt="Dimension"></span>
+					<span  ng-if="attr.mNone" class="glyphicon glyphicon-info-sign icon-tooltip" alt="None"></span>
+					<p><span class="text-muted">Feature type: {{attr.mFeatureType}}</span></p>
+				</div>
+				<div class="col-xs-3">
+                    <span ng-repeat="valueId in attr.mValueIds" ng-class="{'list-group-item-warning' : attributeValues[attr.mKey][$index].mDefault ,'text-warning' : attr.mHasError}">
+                        {{attributeValues[attr.mKey][$index].mValue}}&nbsp&nbsp 
+						<span class="text-muted">{{attr.mMeasureDisplayName}}</span>
+						<span ng-if="$index < attributeValues[attr.mKey].length  - 1"><br /></span>
+					</span>
+				</div>
+				<div class="col-xs-3 text-right">
+					<div class="row">
+						<a href="javascript:void(0);" title="Replace" ng-if="attr.mKey != currentAttribute.mKey" ng-click="openEditValuesPanel($event, attr)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+						&nbsp;&nbsp;
+						<a href="javascript:void(0);" title="Clear" ng-if="attr.mValueIds.length > 0"  ng-click="clearValues(attr)"><span ng-class="{'glyphicon-disable' : attr.mIsGray}" class="glyphicon glyphicon-remove clear" aria-hidden="true"></span></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div ui-if="groupTabs == unAttributeGroup.mId" ui-scope-context="unAttributeGroup">
+		<ul class="list-group table">
+			<li class="list-group-item clearfix" ng-class="{active : attr.mKey == currentAttribute.mKey, 'list-group-item-warning' : attr.mDefault}" ui-scope-context="attr" ng-repeat="attr in unAttributeGroup.mAttributeList">
+				<div class="col-xs-2 text-fluid">
+					<div class="row">{{attr.mKey}}</div>
+				</div>
+				<div class="col-xs-4">
+					{{attr.mDisplayName}} &nbsp;
+					<span ng-if="attr.mRequired" class="glyphicon glyphicon-asterisk icon-tooltip text-danger" alt="Required"></span>
+					<span ng-if="attr.mIndexed" class="glyphicon glyphicon-pushpin icon-tooltip" alt="Index"></span>
+					<span ng-if="attr.mDuplicated" class="glyphicon glyphicon-duplicate icon-tooltip" alt="Duplicate"></span>
+					<span  ng-if="attr.mDimension" class="glyphicon glyphicon-move icon-tooltip" alt="Dimension"></span>
+					<span  ng-if="attr.mNone" class="glyphicon glyphicon-info-sign icon-tooltip" alt="None"></span>
+					<p><span class="text-muted">Feature type: {{attr.mFeatureType}}</span></p>
+				</div>
+				<div class="col-xs-3">
+					<span ng-repeat="valueId in attr.mValueIds" ng-class="{'list-group-item-warning' : attributeValues[attr.mKey][$index].mDefault ,'text-warning' : attr.mHasError}">
+						{{attributeValues[attr.mKey][$index].mValue}} 
+						<span class="text-muted">{{attr.mMeasureDisplayName}}</span>
+						<span ng-if="$index < attributeValues[attr.mKey].length - 1"><br /></span>
+					</span>
+				</div>
+				<div class="col-xs-3 text-right">
+					<div class="row">
+						<a href="javascript:void(0);" title="Replace" ng-if="attr.mKey != currentAttribute.mKey" ng-click="openEditValuesPanel($event, attr)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+						&nbsp;&nbsp;
+						<a href="javascript:void(0);" title="Clear" ng-if="attr.mValueIds.length > 0" ng-click="clearValues(attr)"><span ng-class="{'glyphicon-disable' : attr.mIsGray}" class="glyphicon glyphicon-remove clear" aria-hidden="true"></span></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div ui-if="groupTabs == unValueGroup.mId" ui-scope-context="unValueGroup">
+		<ul class="list-group table">
+			<li class="list-group-item clearfix" ui-scope-context="valueId" ng-repeat="(valueId, attributeValue) in unValueGroup.mValues">
+				<div class="col-xs-2 text-fluid"></div>
+				<div class="col-xs-4"></div>
+				<div class="col-xs-3">{{attributeValue.mValue}}</div>
+				<div class="col-xs-3 text-right">
+				</div>
+			</li>
+		</ul>
+	</div>
+</form>

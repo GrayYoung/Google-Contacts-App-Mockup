@@ -1,0 +1,82 @@
+.navbar-app {
+	min-height: $navbar-app-height;
+	border-radius: 0;
+	
+	.btn-icon-only .fa, .btn-icon-only .icon {
+		font-size : 22px;
+		vertical-align: middle;
+	}
+
+	.btn-navbar {
+		background: none;
+		border: none;
+		line-height: $navbar-app-height;
+		padding-top: 0;
+		padding-bottom: 0;
+		color: $brand-primary;
+		text-transform: uppercase;
+		
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+	}
+	
+	.navbar-text {
+		margin: 0;
+		line-height: $navbar-app-height;
+	}
+}
+
+.navbar-brand-center {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+//Top and bottom navbars with absolute positioning,
+// they are necessary to create scroll areas and fake fixed positioning
+// without glitches.
+
+.navbar-absolute-top, .navbar-absolute-bottom {
+	position: absolute;
+	z-index: $zindex-navbar;
+	border-width: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	margin: 0 !important;
+}
+
+.has-navbar-top {
+	.app .app-body {
+		padding-top: $navbar-app-height + 1;
+	}
+
+	.app-sidebar .app-body {
+		padding-top: 100px;
+	}
+	
+	.sidebar .navbar-app.navbar-absolute-top {
+		height: 100px;
+	}
+}
+
+.has-navbar-bottom .app-body {
+	padding-bottom: $navbar-app-height + 1;
+}
+
+.navbar-absolute-top {
+	top: 0;
+	border-bottom-width: 1px;
+}
+
+.navbar-absolute-bottom {
+	top: auto;
+	bottom: 0;
+	border-bottom: 0 none;
+	border-top-width: 1px;
+}

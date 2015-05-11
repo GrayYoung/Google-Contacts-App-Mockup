@@ -1,0 +1,60 @@
+<form name="editValuesForm">
+	<ul class="list-group">
+		<li class="list-group-item clearfix">
+			<div class="col-xs-4"><div class="row">Public Value</div></div>
+			<div class="col-xs-8">
+				<div class="row">
+					<input class="form-control input-sm" type="text" ng-model="fixedAttributes[currentAttribute].value" />
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item clearfix">
+			<div class="col-xs-4"><div class="row">Private Value</div></div>
+			<div class="col-xs-8">
+				<div class="row">
+					<div ng-if="fixedAttributes[currentAttribute].type != 'text_area' && fixedAttributes[currentAttribute].type != 'y_n' && fixedAttributes[currentAttribute].type != 'restrictedList'" class="input-group input-group-sm input-group-innerBtn">
+						<input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].type == 'numerical'" type="number" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" step="any" />
+						<input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].type != 'numerical'" type="text" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-maxlength="{{settings.textLength}}" ng-model="product.attributeValues[currentAttribute].value" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="product.attributeValues[currentAttribute].value = null"><span class="glyphicon glyphicon-remove-circle"></span></button>
+						</span>
+					</div>
+					<div ng-if="fixedAttributes[currentAttribute].type == 'text_area'" class="input-group input-group-sm">
+						<textarea name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" row="1"  ng-maxlength="{{settings.textAreaLength}}"></textarea>
+					</div>
+					<div ng-if="fixedAttributes[currentAttribute].type == 'restrictedList'">
+						<select name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].isMultiValued != true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" ng-options="restrictedVal for restrictedVal in fixedAttributes[currentAttribute].attributeRestrictedValues | orderBy:restrictedVal">
+						</select>
+						<select name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" multiple ng-if="fixedAttributes[currentAttribute].isMultiValued == true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" ng-options="restrictedVal for restrictedVal in fixedAttributes[currentAttribute].attributeRestrictedValues | orderBy:restrictedVal">
+						</select>
+					</div>
+					<div ng-if="fixedAttributes[currentAttribute].type == 'y_n'">
+						<label class="checkbox-inline"><input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" type="radio" value="true" /> Yes</label>
+						<label class="checkbox-inline"><input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" type="radio" value="false" /> No</label>
+					</div>
+					<div ng-messages="editValuesForm[].$error">
+						<div ng-message="required">You did not enter a field</div>
+						<div ng-message="maxlength">The value entered is too long</div>
+						<div ng-message="number">Not a valid number</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<ul class="list-group" ng-if="fixedAttributes[currentAttribute].type == 'text'">
+		<li class="list-group-item clearfix list-group-header">
+			<div class="col-xs-4"><div class="row">Locale</div></div>
+			<div class="col-xs-8"><div class="row">Value</div></div>
+		</li>
+		<li class="list-group-item clearfix" ng-repeat="locale in settings.allowedLocales">
+			<div class="col-xs-4"><div class="row">{{locale}}</div></div>
+			<div class="col-xs-8">
+				<div class="row"><input class="form-control input-sm" type="text" ng-model="product.attributeValues[currentAttribute].translations[locale]" /></div>
+			</div>
+		</li>
+	</ul>
+	<div class="form-group text-right">
+		<button type="button" class="btn btn-primary btn-sm" ng-click="addLanguage()">Save</button>
+		<button type="button" class="btn btn-primary btn-sm" ui-turn-off="editValuesPanel">Close</button>
+	</div>
+</form>

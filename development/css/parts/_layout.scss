@@ -1,0 +1,232 @@
+//== Layout
+
+//** Modal
+.modal-content {
+	border-radius: 2px;
+}
+
+//** Button
+.input-group-innerBtn .form-control {
+	border-right-width: 0;
+}
+
+.input-group-innerBtn .btn {
+	background: white;
+}
+
+.radio, .checkbox {
+	&.list-group-item {
+		margin-top: 0;
+		margin-bottom: 0;
+		border-width: 0;
+	}
+}
+
+.navbar-brand {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.logo-brand {
+		height: 60px;
+		padding-top: 5px !important;
+		padding-bottom: 5px !important;
+	}
+}
+
+#mainNavbar, #subNavbar .navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+	
+	.nav > li > a {
+		&:focus, &:hover {
+			background: none;
+		}
+	}
+}
+
+#mainNavbar {
+	z-index: $zindex-navbar - 1;
+
+	.navbar {
+		border-width: 0;
+	}
+}
+
+#subNavbar .navbar {
+	z-index: $zindex-navbar - 2;
+
+	.navbar-brand {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		height: 44px;
+	}
+
+	.navbar {
+		border-width: 0;
+	}
+	
+	.navbar-nav > li > a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+
+		.glyphicon {
+			top: auto;
+			line-height: 30px;
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+}
+
+#subNavbar {
+	&.affix, &.affix-top {
+		position: static !important;
+		padding-top: 50px;
+
+		.navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+	}
+}
+
+#editValuesPanel {
+	top: auto;
+	
+	.app-body {
+		padding-top: 85px;
+	}
+}
+
+#mainContainer {
+	padding-top: 25px;
+	z-index: $zindex-navbar - 3;
+
+	.eastPanel {
+		&.affix {
+			bottom: 0;
+		}
+
+		.panel-heading {
+			padding-top: 15px;
+			padding-bottom: 15px;
+			padding-left: 19px;
+			border-style: solid;
+			border-width: 0 0 1px 4px;
+
+			&.active {
+			}
+		}
+
+		.panel-group {
+			margin-bottom: 5px;
+
+			.panel {
+				margin-top: 0;
+				margin-bottom: 0;
+				border-radius: 0;
+				
+				& + .panel {
+					border-top-width: 0;
+				}
+			}
+
+			.panel-heading {
+				padding-top: 15px;
+				padding-bottom: 15px;
+				padding-left: 19px;
+				border-style: solid;
+				border-width: 0 0 1px 4px;
+
+				&.active {
+				}
+			}
+
+			.panel-body {
+				padding: 0;
+			}
+		}
+
+		.list-group {
+			margin-bottom: 0;
+			
+			.list-group-item {
+				border-top-width: 0;
+				border-style: solid;
+				border-left-width: 4px;
+				border-radius: 0;
+			}
+		}
+	}
+	
+	.nav-tabs {
+		display: none;
+	}
+}
+
+#listHeader.affix {
+	position: static !important;
+	padding-top: 40px;
+
+	> .table-header {
+		position: fixed;
+		top: 50px;
+		z-index: 1;
+		width: 100%;
+		padding-top: 25px;
+	}
+}
+
+.app {
+	transform: none !important;
+
+	.table-header {
+		margin-bottom: -1px;
+	}
+
+	.list-group {
+		margin-bottom: 5px;
+	}
+
+	.list-group-item.active {
+		&, &:hover, &:focus {
+			z-index: initial;
+		}
+	}
+}
+
+.show-grid {
+	margin-bottom: 15px;
+}
+
+.icon-tooltip {
+	cursor: default;
+	
+	&:hover {
+		&:after {
+			@extend .tooltip;
+			@extend .tooltip.top;
+			@extend .in;
+			@extend .tooltip-inner;
+			
+			content: attr(alt);
+			top: 1.8em;
+		}
+	}
+}
+
+.loading-spinner {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	position: fixed;
+	top: 40px;
+	z-index: $zindex-navbar + 1;
+	background-image: none !important;
+	
+	&.ng-inactive {
+		display: none;
+	}
+}

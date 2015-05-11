@@ -1,0 +1,35 @@
+// always displays modals
+// use ng-show/ng-hide or ng-if to
+// toggle and ng-animate to fade/animate
+
+.modal {
+	display: block !important;
+}
+
+.modal-dialog {
+	z-index: $zindex-modal;
+}
+
+.modal-overlay {
+	background: rgba(255, 255, 255, .95);
+	
+	.modal-content, .modal-dialog {
+		background: none;
+		@include box-shadow(none);
+		border: none;
+	}
+}
+
+.has-modal, .has-modal-overlay {
+	.app > *:not(.modal), .sidebar {
+		pointer-events:none;	
+	}
+}
+
+.has-modal-overlay {
+	.app, .sidebar{
+		-webkit-filter: blur(5px);
+		-ms-filter: blur(5px); // hope someday will be used
+		filter: blur(5px);
+	}
+}

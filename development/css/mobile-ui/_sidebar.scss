@@ -1,0 +1,55 @@
+.sidebar {
+	z-index: 0;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: $zindex-navbar - 3;
+	display: none;
+	pointer-events: none;
+	@include translate3d(0, 0, 0);
+	@include transition-transform(0.4s ease);
+	pointer-events: none;
+}
+
+.sidebar-left {
+	width: $sidebar-left-width;
+	left: 0;
+	right: auto;
+	@include transition-transform(width 0.4s ease);
+}
+
+.sidebar-right {
+	width: $sidebar-right-width;
+	left: auto;
+	right: 0;
+	@include transition-transform(width 0.4s ease);
+}
+
+.sidebar-left-in .sidebar-left, .sidebar-right-in .sidebar-right {
+	pointer-events: auto;
+	display: block;
+}
+
+.sidebar-left-in .app {
+	width: 100%;
+	/* @include translate($sidebar-left-width, 0);
+	@include transition-transform(width 0.4s ease); */
+}
+
+.sidebar-right-in .app {
+	width: 100%;
+	/* @include translate(-$sidebar-right-width, 0);
+	@include transition-transform(width 0.4s ease); */
+}
+
+
+.sidebar-header, .app-name {
+	position: relative;
+	width: 100%;
+	line-height: 70px;
+	padding: 0 10px;
+	font-size: 23px;
+	color: #fff;
+	margin: 0;
+	z-index: 10;
+}

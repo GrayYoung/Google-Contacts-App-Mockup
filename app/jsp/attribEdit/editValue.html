@@ -1,0 +1,61 @@
+<div class="modal" ui-if="modelEditValue" ui-state='modelEditValue'>
+	<div class="modal-backdrop in"></div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" ui-turn-off="modelEditValue">&times;</button>
+				<h4 class="modal-title">{{currentAttribute.mDisplayName}}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="editValueForm" class="form-horizontal">
+					<div class="form-group form-group-sm">
+						<label for="defaultValue" class="col-sm-4 control-label">Default Value</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" />
+						</div>
+					</div>
+					<fieldset>
+						<legend>Locale Values</legend>
+						<div class="form-group form-group-sm" ng-repeat="locale in ['en', 'ge', 'zh']">
+							<label for="defaultValue" class="col-sm-4 control-label">{{locale}}</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" />
+							</div>
+						</div>
+					</fieldset>
+					<div class="col-xs-8">
+						<div class="row">
+							<div ng-if="fixedAttributes[currentAttribute].type != 'text_area' && fixedAttributes[currentAttribute].type != 'y_n' && fixedAttributes[currentAttribute].type != 'restrictedList'" class="input-group input-group-sm input-group-innerBtn">
+								<input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].type == 'numerical'" type="number" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" step="any" /> <input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].type != 'numerical'" type="text" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-maxlength="{{settings.textLength}}" ng-model="product.attributeValues[currentAttribute].value" /> <span class="input-group-btn">
+									<button class="btn btn-default" type="button" ng-click="product.attributeValues[currentAttribute].value = null">
+										<span class="glyphicon glyphicon-remove-circle"></span>
+									</button>
+								</span>
+							</div>
+							<div ng-if="fixedAttributes[currentAttribute].type == 'text_area'" class="input-group input-group-sm">
+								<textarea name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control" ng-trim="true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" row="1" ng-maxlength="{{settings.textAreaLength}}"></textarea>
+							</div>
+							<div ng-if="fixedAttributes[currentAttribute].type == 'restrictedList'">
+								<select name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" ng-if="fixedAttributes[currentAttribute].isMultiValued != true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" ng-options="restrictedVal for restrictedVal in fixedAttributes[currentAttribute].attributeRestrictedValues | orderBy:restrictedVal">
+								</select> <select name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" class="form-control input-sm" multiple ng-if="fixedAttributes[currentAttribute].isMultiValued == true" ng-required="fixedAttributes[currentAttribute].required" ng-model="product.attributeValues[currentAttribute].value" ng-options="restrictedVal for restrictedVal in fixedAttributes[currentAttribute].attributeRestrictedValues | orderBy:restrictedVal">
+								</select>
+							</div>
+							<div ng-if="fixedAttributes[currentAttribute].type == 'y_n'">
+								<label class="checkbox-inline"><input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" type="radio" value="true" /> Yes</label> <label class="checkbox-inline"><input name="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" id="{{'attr' + fixedAttributes[currentAttribute].attributeId}}" type="radio" value="false" /> No</label>
+							</div>
+							<div ng-messages="editValuesForm[].$error">
+								<div ng-message="required">You did not enter a field</div>
+								<div ng-message="maxlength">The value entered is too long</div>
+								<div ng-message="number">Not a valid number</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button ui-turn-off="modelEditValue" class="btn btn-default">Close</button>
+				<button ui-turn-off="modelEditValue" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

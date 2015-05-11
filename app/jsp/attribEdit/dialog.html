@@ -1,0 +1,39 @@
+<div class="modal" ui-if="ConfirmDialog" ui-state='ConfirmDialog'>
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" ui-turn-off="ConfirmDialog">&times;</button>
+                <h4 class="modal-title">Title</h4>
+            </div>
+            <div class="modal-body">
+			<span ng-messages="system.messages">
+				<span ng-message="canCancel">{{system.canCancelMessage}}</span>
+				<span ng-message="notCancel">{{system.notCancelMessage}}</span>
+				<span ng-message="canClear">{{system.canClearMessage}}</span>
+			</span>
+            </div>
+            <div class="modal-footer">
+                <button ui-turn-off="ConfirmDialog" class="btn btn-default" ng-click="dialogBtnYes()">Yes</button>
+                <button ui-turn-off="ConfirmDialog" class="btn btn-primary" ng-click="dialogBtnNo()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" ui-if="SureDialog" ui-state='SureDialog'>
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" ui-turn-off="SureDialog">&times;</button>
+                <h4 class="modal-title">Title</h4>
+            </div>
+            <div class="modal-body">
+                <span>{{system.notClearMessage}}</span>
+            </div>
+            <div class="modal-footer">
+                <button ui-turn-off="SureDialog" class="btn btn-default">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

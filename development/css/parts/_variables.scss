@@ -1,0 +1,76 @@
+//== Variables
+//
+// --------------------------------------------------
+
+//== Override Bootstrap Colors
+$body-bg:					#e5e5e5;
+
+
+//== Override Bootstrap Typography
+//
+$font-family-base:        Roboto, arial, sans-serif;
+$font-size-base:          13px;
+
+//== Override Bootstrap Scaffolding
+
+//== Override Bootstrap Iconography
+$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../fonts/");
+
+//== Override Bootstrap Media queries breakpoints
+$screen-xs:                  480px;
+$screen-xs-min:              $screen-xs;
+$screen-phone:               $screen-xs-min;
+$screen-sm:                  720px;
+$screen-sm-min:              $screen-sm;
+$screen-tablet:              $screen-sm-min;
+$screen-md:                  960px;
+$screen-md-min:              $screen-md;
+$screen-desktop:             $screen-md-min;
+
+$screen-lg:                  1140px;
+$screen-lg-min:              $screen-lg;
+$screen-lg-desktop:          $screen-lg-min;
+
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+$screen-md-max:              ($screen-lg-min - 1);
+
+//== Override Bootstrap Container sizes
+$container-tablet:             auto;
+$container-sm:                 $container-tablet;
+$container-desktop:            auto;
+$container-md:                 $container-desktop;
+$container-large-desktop:      (1100px + $grid-gutter-width);
+$container-lg:                 $container-large-desktop;
+
+//== Sidebars
+$sidebar-width: 				300px;
+$sidebar-width-xs:				$screen-xs-min - 40;
+$sidebar-width-sm:				$screen-sm-min - 80;
+$sidebar-width-md:				300px;
+$sidebar-width-lg:				320px;
+$sidebar-left-width:			$sidebar-width;
+$sidebar-right-width:			$sidebar-width;
+
+$sidebar-left-width-xs:			$sidebar-width-xs;
+$sidebar-right-width-xs:		$sidebar-width-xs;
+
+$sidebar-left-width-sm:			$sidebar-width-sm;
+$sidebar-right-width-sm:		$sidebar-width-sm;
+
+$sidebar-left-width-md:			$sidebar-width-md;
+$sidebar-right-width-md:		$sidebar-width-md;
+
+$sidebar-left-width-lg:			$sidebar-width-lg;
+$sidebar-right-width-lg:		$sidebar-width-lg;
+
+$sidebar-header-height:			70px;
+
+//== Navbar
+$navbar-app-height: 			50px;
+
+// Switch
+$switch-handle-diameter:		$input-height-base;
+$switch-width:					$switch-handle-diameter * 2;
+$switch-height:					$switch-handle-diameter;
+$zindex-switch-handle:			2;

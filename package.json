@@ -1,0 +1,26 @@
+{
+  "name": "Donaldson",
+  "version": "2.0.2",
+  "dependencies": {},
+  "description": "Base ACS Web UI",
+  "main": "gulpfile.js",
+  "author": "AAXIS Commerce",
+  "license": "Copyright 2014",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-bower": "latest",
+    "gulp-clean": "latest",
+    "gulp-filter": "latest",
+    "gulp-flatten": "latest",
+    "gulp-jshint": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-sass": "<1.0.0",
+    "gulp-size": "latest",
+    "jshint-stylish": "latest",
+    "merge-stream" : "latest",
+    "requirejs": "latest",
+    "yargs": "latest"
+  }
+}

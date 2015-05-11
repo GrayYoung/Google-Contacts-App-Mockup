@@ -1,0 +1,24 @@
+//== Typography
+
+a, .btn {
+	&, &:active, &:link, &:visited, &:focus {
+		outline: none;
+	}
+}
+
+.text-fluid {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.input-group-sm.input-group-innerBtn .btn > .glyphicon {
+	font-size: 18px;
+}
+
+#mainContainer .navlist a {
+	text-decoration: none;
+}
+
+#mainNavbar .navbar-brand {
+	line-height: 30px;
+}

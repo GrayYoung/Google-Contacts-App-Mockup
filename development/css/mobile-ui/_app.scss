@@ -1,0 +1,32 @@
+.app, .app-sidebar {
+	height: 100%;
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	overflow: hidden;
+	@include translate3d(0,0,0);
+	@include transition-transform(0.4s ease);
+}
+
+.app-body {
+	display: block;
+	height: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+.app-content {
+	display: block;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+.app-search {
+	position: relative;
+	border-width: 0 0 1px;
+	z-index: $zindex-navbar-fixed - 1;
+	width: 100%;
+}

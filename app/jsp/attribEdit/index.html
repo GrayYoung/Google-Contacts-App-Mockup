@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app="flexAttributesManagement">
+<head>
+	<title>Product Attribute Value Configuration</title>
+	<!-- saved from url=(0014)about:internet -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<meta name="apple-mobile-web-app-status-bar-style" content="yes">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/themes/default-skin.css">
+	<!--[if lt IE 9]>
+			<script src="/js/lib/html5shiv/dist/html5shiv.min.js"></script>
+			<script src="/js/lib/respond/dest/respond.min.js"></script>
+		<![endif]-->
+	<script type="text/javascript" src="/js/lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/js/lib/angular-messages/angular-messages.min.js"></script>
+	<script type="text/javascript" src="/js/lib/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript" src="/js/lib/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="/js/lib/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/ngScrollSpy.js"></script>
+	<script type="text/javascript" src="/js/app/data-versionedView.js"></script>
+	<script type="text/javascript" src="/js/app/flexAttributesControl.js"></script>
+</head>
+<body ng-controller="MainController">
+	<div id="container-layout">
+		<nav class="navbar" id="mainNavbar">
+			<div class="container-fluid">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand logo-brand" href="javascript:void(0);"><img alt="Aaxis BCC" src="/images/common/aaxis_logo.png" height="100%"></a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a class="" href="javascript:void(0);" ng-click="cancel()" title="Cancle"><i class="glyphicon glyphicon glyphicon-off"></i> Cancel</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div id="subNavbar" affix>
+			<nav class="navbar">
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<span class="navbar-brand">BCC - Product Attribute Value Configuration</span>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="app-content-loading text-center">
+			<span class="alert alert-warning loading-spinner" role="alert" ng-messages="system.messages">
+				<span ng-message="loading">Loading</span>
+				<span ng-message="saving">Saving</span>
+			</span>
+		</div>
+		<div id="mainContainer" class="container-fluid">
+			<div class="sidebar sidebar-right westPanel" id="editValuesPanel" ui-state="editValuesPanel" close-on-outer-clicks="false" ng-swipe-right="Ui.turnOff('editValuesPanel')">
+				<div class="navbar-app navbar-absolute-top">
+					<div class="show-grid"></div>
+					<div class="container-fluid">
+						<h4 class="clearfix ng-binding">Attribute Value <a class="close" ui-turn-off="editValuesPanel"><strong>×</strong></a></h4>
+						<div class="input-group input-group-sm input-group-innerBtn">
+							<input name="searchValue" ng-model="searchValue" ng-change="updateValueList($event)" ng-focus="updateValueList($event)" class="form-control input-sm ng-pristine ng-untouched ng-valid needsclick" placeholder="Attribute Value Filter" type="text">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click=""><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="navbar navbar-app navbar-absolute-bottom">
+					<p></p>
+					<div class="container-fluid text-right">
+						<a href="javascript:void(0);" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
+						<a href="javascript:void(0);" class="btn btn-default btn-sm" ng-click="editValues()"><i class="glyphicon glyphicon-save-file"></i> Save</a>
+						<a href="javascript:void(0);" class="btn btn-default btn-sm" ui-turn-off="editValuesPanel"><i class="fa fa-exclamation-circle fa-navbar"></i> Cancle</a>
+					</div>
+				</div>
+				<div class="app-sidebar">
+					<div class="app-body">
+						<div class="app-content">
+							<div class="scrollable">
+								<div class="scrollable-content">
+									<div class="list-group">
+										<div class="list-group-item {{currentAttribute.mMultiple ? 'checkbox' : 'radio'}}" ng-repeat="(valueId, value) in valueList">
+											<label>
+												<input type="{{currentAttribute.mMultiple ? 'checkbox' : 'radio'}}" name="valueSelected" ng-value="valueId" /> {{value}}
+											</label>
+											<a class="glyphicon glyphicon-pencil pull-right" ng-click="editValue(valueId, value)"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="eastPanel" affix="top">
+					<div class="panel-group navlist">
+						<div class="container-fluid panel">
+							<div class="show-grid clearfix"></div>
+							<div class="show-grid clearfix"></div>
+							<h4 class="ng-binding"><small class="text-muted">Product name:</small> {{product.name}}</h4>
+							<h4 class="ng-binding"><small class="text-muted">Product type:</small> {{product.typeName}}</h4>
+							<div class="show-grid clearfix"></div>
+						</div>
+						<div class="panel">
+							<div class="panel-heading">
+								<h4 class="panel-title">Attribute Groups <a href="javascript:void(0);" class="glyphicon glyphicon-chevron-down pull-right" ng-click="toggleCollapse($event)"></a></h4>
+							</div>
+							<div class="panel-collapse collapse in">
+								<div class="panel-body">
+									<ul class="list-group" ui-state="groupTabs" ui-default="attributeGroups[0].mId" ui-scope-context="attributeGroups">
+										<li class="list-group-item" ui-class="{'active': groupTabs == aGroup.mId}" ui-scope-context="aGroup" ng-repeat="aGroup in attributeGroups">
+											<i class="glyphicon glyphicon-triangle-right"></i> 
+											<a class="ng-binding" href="javascript:void(0);" ui-set="{'groupTabs' : aGroup.mId}" ui-scope-context="aGroup.mId">{{aGroup.mDisplayName}}</a> <br>
+											<i class="glyphicon">&nbsp;</i> <small class="text-muted ng-binding">ID: {{aGroup.mId}}</small>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-heading" ui-class="{'active': groupTabs == unAttributeGroup.mId}" ui-scope-context="unAttributeGroup">
+								<h4 class="panel-title"><a href="javascript:void(0);" ui-set="{'groupTabs' : unAttributeGroup.mId}" ui-scope-context="unAttributeGroup">Unassociated Attributes</a></h4>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="panel-heading" ui-class="{'active': groupTabs == unValueGroup.mId}" ui-scope-context="unValueGroup">
+								<h4 class="panel-title"><a href="javascript:void(0);" ui-set="{'groupTabs' : unValueGroup.mId}"  ui-scope-context="unValueGroup">Unassociated Values</a></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9 pull-right">
+				<div class="container-fluid">
+					<hgroup>
+						<h4 class="group-title">{{currentGroup}}</h4>
+						<h5 class="text-warning"  ng-messages="system.messages">
+							<ng-message when="unassociatedAttributes">The attribute and value won’t display at store because the attributes are not linked to attribute group.</ng-message>
+							<ng-message when="unassociatedValues">The attribute values won’t display at store because the attribute values are not linked to attribute.</ng-message>
+						</h5>
+					</hgroup>
+					<div class="show-grid"></div>
+				</div>
+				<div class="app">
+					<div class="">
+						<div class="app-content">
+							<div id="listHeader" affix>
+								<ul class="list-unstyled table table-header">
+									<li class="list-group-item list-group-header clearfix">
+										<div class="col-xs-2">
+											<div class="row">Attribute ID</div>
+										</div>
+										<div class="col-xs-4">Attribute</div>
+										<div class="col-xs-3">Value(s)</div>
+										<div class="col-xs-3">
+											<div class="row">
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<!-- ngInclude: 'attributeGroupPanel.html' -->
+							<div id="listContent" ng-include="'attributeGroupPanel.html'">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ui-content-for="modals">
+	
+	</div>
+</body>
+</html>
